@@ -1,4 +1,4 @@
-module logging
+module github.com/luciano-personal-org/logging
 
 go 1.23.5
 
