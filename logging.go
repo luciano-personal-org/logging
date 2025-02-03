@@ -31,7 +31,7 @@ type DebugOptions struct {
 // isValidOption validates the debug option
 func isValidOption(level string) bool {
 	switch level {
-	case INFO, STACK, MEM, GC, BUILD, ALL:
+	case STACK, MEM, GC, BUILD, ALL:
 		return true
 	default:
 		return false
