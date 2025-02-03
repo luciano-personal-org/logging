@@ -1,2 +1,4 @@
 github.com/go-logr/logr v1.4.2 h1:6pFjapn8bFcIbiKo3XT4j/BhANplGihG6tvd+8rYgrY=
 github.com/go-logr/logr v1.4.2/go.mod h1:9T104GzyrTigFIr8wt5mBrctHMim0Nb2HLGrmQ40KvY=
+github.com/luciano-personal-org/exception v0.1.18 h1:HJGJa5LwR6Tu1rwdN/60qcIddwnUW6NLSd3JQP5ur6o=
+github.com/luciano-personal-org/exception v0.1.18/go.mod h1:ixwmXHQdKiAqRlVmaqg21jW3tWrAPXsidinCxnLcN6c=
