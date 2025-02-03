@@ -16,7 +16,6 @@ import (
 
 // DebugOptions is a type for debug options
 const (
-	INFO  = "INFO"  // Default
 	STACK = "STACK" // Stack Trace
 	MEM   = "MEM"   // Memory Stats
 	GC    = "GC"    // GC Stats
@@ -42,7 +41,8 @@ func isValidOption(level string) bool {
 type Level int
 
 const (
-	DEBUG Level = 1
+	INFO Level = iota
+	DEBUG
 )
 
 // String returns the string representation of the SignalDirection.
@@ -56,11 +56,10 @@ type Logger struct {
 
 var Logging Logger
 
-func InitLogger(appName string, appModuleName string, logLevel string) {
+func InitLogger(appName string, appModuleName string, logLevel Level) {
 
 	level := 0
-
-	if logLevel == DEBUG.String() {
+	if logLevel == DEBUG {
 		level = int(DEBUG)
 	}
 
