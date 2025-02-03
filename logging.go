@@ -16,6 +16,7 @@ import (
 
 // DebugOptions is a type for debug options
 const (
+	INFO  = "INFO"  // Stack Trace
 	STACK = "STACK" // Stack Trace
 	MEM   = "MEM"   // Memory Stats
 	GC    = "GC"    // GC Stats
@@ -31,7 +32,7 @@ type DebugOptions struct {
 // isValidOption validates the debug option
 func isValidOption(level string) bool {
 	switch level {
-	case STACK, MEM, GC, BUILD, ALL:
+	case INFO, STACK, MEM, GC, BUILD, ALL:
 		return true
 	default:
 		return false
@@ -39,11 +40,6 @@ func isValidOption(level string) bool {
 }
 
 type Level int
-
-const (
-	INFO Level = iota
-	DEBUG
-)
 
 // String returns the string representation of the SignalDirection.
 func (d Level) String() string {
@@ -56,16 +52,11 @@ type Logger struct {
 
 var Logging Logger
 
-func InitLogger(appName string, appModuleName string, logLevel Level) {
-
-	level := 0
-	if logLevel == DEBUG {
-		level = int(DEBUG)
-	}
+func InitLogger(appName string, appModuleName string) {
 
 	handler := slog.NewJSONHandler(os.Stderr, &slog.HandlerOptions{
 		AddSource: true,
-		Level:     slog.Level(level),
+		Level:     slog.Level(0),
 	})
 
 	logger := logr.FromSlogHandler(handler)
@@ -109,6 +100,7 @@ func (logger *Logger) Debug(msg string, options DebugOptions, keysAndValues ...i
 
 	// Business Message
 	logger.Logs.WithCallDepth(2).Info(msg)
+
 	// Stack Trace
 	if level == STACK || level == ALL {
 		logger.Logs.WithCallDepth(2).Info(fmt.Sprintf("Stack Trace:%s", debug.Stack()))
